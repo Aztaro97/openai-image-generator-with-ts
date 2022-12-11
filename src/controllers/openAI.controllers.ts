@@ -1,11 +1,9 @@
 import { Request, Response } from "express"
 import { OpenAIApi, Configuration } from "openai";
 
-const api_key = "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"
-
 const configuration = new Configuration({
-	apiKey: api_key,
-	// apiKey: `${process.env.OPENAI_API_KEY}`,
+	// apiKey: api_key,
+	apiKey: `${process.env.OPENAI_API_KEY}`,
 });
 const openai = new OpenAIApi(configuration);
 

@@ -8,16 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { OpenAIApi, Configuration } from "openai";
-const api_key = "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";
 const configuration = new Configuration({
-    apiKey: api_key,
-    // apiKey: `${process.env.OPENAI_API_KEY}`,
+    // apiKey: api_key,
+    apiKey: `${process.env.OPENAI_API_KEY}`,
 });
 const openai = new OpenAIApi(configuration);
 const getImageGenerator = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { prompt } = req.body;
-        console.log(process.env.OPENAI_API_KEY);
         const response = yield openai.createImage({
             prompt,
             n: 3,
