@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import { OpenAIApi, Configuration } from "openai";
 
 const configuration = new Configuration({
-	// apiKey: api_key,
 	apiKey: `${process.env.OPENAI_API_KEY}`,
 });
 const openai = new OpenAIApi(configuration);
@@ -10,12 +9,14 @@ const openai = new OpenAIApi(configuration);
 
 const getImageGenerator = async (req: Request, res: Response) => {
 	try {
-		const { prompt } = req.body;
+		const { prompt, imageNumber, imageSize } = req.body;
+
+		const size = imageSize === "small" ? "512x512" : imageSize === "medium" ? "256x256" : "1024x1024";
 
 		const response = await openai.createImage({
 			prompt,
-			n: 3,
-			size: "512x512"
+			n: imageNumber,
+			size
 		});
 		const imageUrl = response.data.data
 		res.status(200).json({
